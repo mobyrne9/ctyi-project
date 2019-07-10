@@ -1,75 +1,164 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
     <title> Meadhbh's Website </title>
-    <link rel="stylesheet" type="text/css" href="style1.css">
-      <link href='https://fonts.googleapis.com/css?family=Abel' rel="stylesheet">
+    <link rel='stylesheet' type='text/css' href='style1.css'>
+      <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
+      <link rel='stylesheet' href='calculator.css'>
       <style>
           body {
               font-family: 'Abel';font-size: 22px;
           }
           </style>
   </head>
-<body class="body">
-    <div class="sidenav">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="ctyi.html">CTYI</a>
-        <a href="music.html">Music</a>
-        <a href="gallery.html">Gallery</a>
+<body class='body'>
+    <div class='sidenav'>
+        <a href='index.html'>Home</a>
+        <a href='about.html'>About</a>
+        <a href='ctyi.html'>CTYI</a>
+        <a href='music.html'>Music</a>
+        <a href='gallery.html'>Fun</a>
       </div>
-      <div class="main">
-<div class="header">
-<h1>Meadhbh's Website</h1>
+      <div class='main'>
+<div class='header'>
+<h1> The Website</h1>
 </div>
-<h2>Gallery</h2>
-<style>
-        div.gallery {
-          margin: 5px;
-          border: 1px solid;
-          float: left;
-          width: 180px;
-        }
-        
-        div.gallery:hover {
-          border: 1px solid #777;
-        }
-        
-        div.gallery img {
-          width: 100%;
-          height: auto;
-        }
-        
-        div.desc {
-          padding: 15px;
-          text-align: center;
-        }
-        </style>
-        </head>
-        <body>
-       <p>
-        <div class="gallery">
-          <a target="_blank" href="imaged.jpeg">
-            <img src="imaged.jpeg" alt="Dublin" width="800" height="600">
-  
-        </div>
-        
-        <div class="gallery">
-          <a target="_blank" href="imagec.jpg">
-            <img src="imagec.jpg" alt="Forest" width="800" height="600">
-          </a>
-        </div>
-        
-        <div class="gallery">
-          <a target="_blank" href="imageb.jpg">
-            <img src="imageb.jpg" alt="Northern Lights" width="800" height="600">
-          </a>
-        </div>
-        
-        <div class="gallery">
-          <a target="_blank" href="IMAGEA.jpeg">
-            <img src="IMAGEA.jpeg" alt="Mountains" width="800" height="600">
-          </a>
+<h2>Fun</h2>
+<p></p>
+<canvas id='canvas' width='400' height='400'
+style='background-color:#333'>
+</canvas>
+
+<script>
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+var radius = canvas.height / 2;
+ctx.translate(radius, radius);
+radius = radius * 0.90
+setInterval(drawClock, 1000);
+
+function drawClock() {
+  drawFace(ctx, radius);
+  drawNumbers(ctx, radius);
+  drawTime(ctx, radius);
+}
+
+function drawFace(ctx, radius) {
+  var grad;
+  ctx.beginPath();
+  ctx.arc(0, 0, radius, 0, 2*Math.PI);
+  ctx.fillStyle = 'white';
+  ctx.fill();
+  grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
+  grad.addColorStop(0, '#333');
+  grad.addColorStop(0.5, 'white');
+  grad.addColorStop(1, '#333');
+  ctx.strokeStyle = grad;
+  ctx.lineWidth = radius*0.1;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
+  ctx.fillStyle = '#333';
+  ctx.fill();
+}
+
+function drawNumbers(ctx, radius) {
+  var ang;
+  var num;
+  ctx.font = radius*0.15 + 'px arial';
+  ctx.textBaseline='middle';
+  ctx.textAlign='center';
+  for(num = 1; num < 13; num++){
+    ang = num * Math.PI / 6;
+    ctx.rotate(ang);
+    ctx.translate(0, -radius*0.85);
+    ctx.rotate(-ang);
+    ctx.fillText(num.toString(), 0, 0);
+    ctx.rotate(ang);
+    ctx.translate(0, radius*0.85);
+    ctx.rotate(-ang);
+  }
+}
+
+function drawTime(ctx, radius){
+    var now = new Date();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    //hour
+    hour=hour%12;
+    hour=(hour*Math.PI/6)+
+    (minute*Math.PI/(6*60))+
+    (second*Math.PI/(360*60));
+    drawHand(ctx, hour, radius*0.5, radius*0.07);
+    //minute
+    minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
+    drawHand(ctx, minute, radius*0.8, radius*0.07);
+    // second
+    second=(second*Math.PI/30);
+    drawHand(ctx, second, radius*0.9, radius*0.02);
+}
+
+function drawHand(ctx, pos, length, width) {
+    ctx.beginPath();
+    ctx.lineWidth = width;
+    ctx.lineCap = 'round';
+    ctx.moveTo(0,0);
+    ctx.rotate(pos);
+    ctx.lineTo(0, -length);
+    ctx.stroke();
+    ctx.rotate(-pos);
+}
+</script>
+<body>
+    <script>
+    function calcNumbers(result){
+      form.displayResult.value=form.displayResult.value+result;
+      
+    }
+    </script>
+    
+    <div class="container">
+      <form name="form">
+      <div class="display">
+      <input type="text" placeholder="0" name="displayResult">
       </div>
-</body>
-</html> 
+      <div class="buttons">
+      <div class="row">
+      <input type="button" name="b7" value="7" onClick="calcNumbers(b7.value)">
+      <input type="button" name="b8" value="8" onClick="calcNumbers(b8.value)">
+      <input type="button" name="b9" value="9" onClick="calcNumbers(b9.value)">
+      <input type="button" name="addb" value="+" onClick="calcNumbers(addb.value)">
+      </div>
+      
+      <div class="row">
+      <input type="button" name="b4" value="4" onClick="calcNumbers(b4.value)">
+      <input type="button" name="b5" value="5" onClick="calcNumbers(b5.value)">
+      <input type="button" name="b6" value="6" onClick="calcNumbers(b6.value)">
+      <input type="button" name="subb" value="-" onClick="calcNumbers(subb.value)">
+      </div>
+      
+      <div class="row">
+      <input type="button" name="b1" value="1" onClick="calcNumbers(b1.value)">
+      <input type="button" name="b2" value="2" onClick="calcNumbers(b2.value)">
+      <input type="button" name="b3" value="3" onClick="calcNumbers(b3.value)">
+      <input type="button" name="mulb" value="*" onClick="calcNumbers(mulb.value)">
+      </div>
+      
+      <div class="row">
+      <input type="button" name="b0" value="0" onClick="calcNumbers(b0.value)">
+      <input type="button" name="potb" value="." onClick="calcNumbers(potb.value)">
+      <input type="button" name="divb" value="/" onClick="calcNumbers(divb.value)">
+      <input type="button" class="red" value="=" onClick="displayResult.value=eval(displayResult.value)">
+      </div>
+      </div>
+      
+      </form>
+    </div>
+  </body>
+  <p></p>
+  <p><iframe width="667" height="370"
+src="https://www.youtube.com/embed/AWX0mWNHHPg">
+</iframe></p> 
+  </html> 
