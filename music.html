@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script type="text/javascript" src="music.js"></script>
     <title> Meadhbh's Website </title>
-    <link href="music.js">
     <link rel="stylesheet" type="text/css" href="style1.css">
       <link href='https://fonts.googleapis.com/css?family=Abel' rel="stylesheet">
       <style>
@@ -24,22 +22,47 @@
 <div class="header">
 <h1>Meadhbh's Website</h1>
 </div>
-  <h2>Music</h2>
-  <button id="clickme" onclick="buttonClicked()">click me for a random song</button><br>
-  <span id="displayme"></span>
+<h2>Music</h2>
+<script type="text/javascript">
+  function randomlinks(){
+      var myrandom=Math.round(Math.random()*9)
+      var links=new Array()
+      links[0]="https://www.youtube.com/watch?v=gghFPavXE7Q"
+      links[1]="https://www.youtube.com/watch?v=3KIeGUVQjSg"
+      links[2]="https://www.youtube.com/watch?v=ma9I9VBKPiw"
+      links[3]="https://www.youtube.com/watch?v=4VZd-U-8PeU"
+      links[4]="https://www.youtube.com/watch?v=u5CVsCnxyXgm"
+      links[5]="https://www.youtube.com/watch?v=r3J-aQB54GM"
+      links[6]="https://www.youtube.com/watch?v=1Ce_ICrHVfU"
+      links[7]="https://www.youtube.com/watch?v=TguVKVwqrwU"
+      links[8]="https://www.youtube.com/watch?v=qUE4oDunYkc"
+      links[9]="https://www.youtube.com/watch?v=f4Mc-NYPHaQ"
+      links[10]="https://www.youtube.com/watch?v=eF551z9KlA8"
+      links[11]="https://www.youtube.com/watch?v=pl3vxEudif8"
+      links[12]="https://www.youtube.com/watch?v=rVNCpCy8gLc"
+      links[13]="https://www.youtube.com/watch?v=6oqXVx3sBOk"
+      links[14]="https://www.youtube.com/watch?v=kzQETV5SGzc"
+   
+      window.location=links[myrandom]
+      target="_blank"
+  }
+  </script>
+  <form>
+  <input type="button" value="click me for a random song!" onClick="randomlinks()">
+  </form>
   <p></p>
   <p> Welcome to the music page! Here you'll find my favourite music videos, interviews, and the like.
   </p>
-  <p>One of my favourite bands is Blur!  Below are some of their songs and music videos </p>
-  <!--  <iframe width="592" height="359"
+  <p>One of my favourite bands is Blur. Below are some of their songs and music videos. </p>
+  <iframe width="502" height="269"
 src="https://www.youtube.com/embed/gghFPavXE7Q">
 </iframe> 
-<iframe width="610" height="330"
+<iframe width="520" height="240"
 src="https://www.youtube.com/embed/xbch_4zVl4Q">
 </iframe>
-<iframe width="610" height="242"
+<iframe width="520" height="240"
 src="https://www.youtube.com/embed/6oqXVx3sBOk">
-</iframe> -->
+</iframe> 
 </div>
 </div>
 </body>
